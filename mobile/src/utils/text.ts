@@ -3,7 +3,7 @@ import { AUTO_DETECT, getDirection, type TextDirection } from '../constants/lang
 const ARABIC_SCRIPT = /[؀-ۿݐ-ݿﭐ-﷿ﹰ-﻿]/;
 const CJK = /[　-〿぀-ヿ一-鿿豈-﫿]/;
 
-/** True when the string contains Arabic-script characters (Uyghur, Arabic, Urdu, Persian). */
+/** True when the string contains Arabic-script characters (Uyghur, Arabic, Urdu). */
 export function containsArabicScript(text: string): boolean {
   return ARABIC_SCRIPT.test(text);
 }

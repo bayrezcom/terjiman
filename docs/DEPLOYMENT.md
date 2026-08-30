@@ -104,7 +104,7 @@ curl https://api.your-domain.com/api/health
 ```
 
 ```json
-{"success":true,"status":"ok","aiConfigured":true,"supportsVoiceInput":true,"maxTextLength":5000,"languages":14}
+{"success":true,"status":"ok","aiConfigured":true,"supportsVoiceInput":true,"maxTextLength":5000,"languages":13}
 ```
 
 ## 3. Point the app at it
@@ -161,9 +161,13 @@ docker build -t terjiman-site ./site
 docker run --rm -p 8080:8080 terjiman-site
 ```
 
-The page offers Turkish, English and Uyghur, switches to `dir="rtl"` for
-Uyghur, and remembers the choice in the visitor's browser. See
-`site/README.md` for how to edit the copy.
+Uyghur is the site's main language: the page loads in Uyghur with
+`dir="rtl"`, and Turkish and English are offered from the header. The choice
+is remembered in the visitor's browser and can also be set from the URL
+(`?lang=tr`, `?lang=en`), which is what the `hreflang` tags and `sitemap.xml`
+advertise. `robots.txt` and `sitemap.xml` are served from the site root, so
+point Search Console at `https://terjiman.bayrez.com/sitemap.xml` once the
+domain is live. See `site/README.md` for how to edit the copy.
 
 
 ## 6. Operating notes

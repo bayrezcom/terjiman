@@ -2,8 +2,8 @@ import { AUTO_DETECT, getDirection, isRtlLanguage } from '../src/constants/langu
 import { containsArabicScript, previewText, resolveTextDirection } from '../src/utils/text';
 
 describe('RTL detection', () => {
-  it('marks Uyghur, Arabic, Urdu and Persian as RTL', () => {
-    for (const code of ['ug', 'ar', 'ur', 'fa']) {
+  it('marks Uyghur, Arabic and Urdu as RTL', () => {
+    for (const code of ['ug', 'ar', 'ur']) {
       expect(isRtlLanguage(code)).toBe(true);
       expect(getDirection(code)).toBe('rtl');
     }

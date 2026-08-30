@@ -40,7 +40,6 @@ export const LANGUAGES: readonly Language[] = [
   { code: 'ru', name: 'Русский', englishName: 'Russian', direction: 'ltr', speechLocale: 'ru-RU' },
   { code: 'kk', name: 'Қазақша', englishName: 'Kazakh', direction: 'ltr', speechLocale: 'kk-KZ' },
   { code: 'uz', name: "O'zbekcha", englishName: 'Uzbek', direction: 'ltr', speechLocale: 'uz-UZ' },
-  { code: 'fa', name: 'فارسی', englishName: 'Persian', direction: 'rtl', speechLocale: 'fa-IR' },
   { code: 'fr', name: 'Français', englishName: 'French', direction: 'ltr', speechLocale: 'fr-FR' },
   { code: 'de', name: 'Deutsch', englishName: 'German', direction: 'ltr', speechLocale: 'de-DE' },
   { code: 'es', name: 'Español', englishName: 'Spanish', direction: 'ltr', speechLocale: 'es-ES' },

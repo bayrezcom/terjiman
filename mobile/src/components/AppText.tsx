@@ -23,7 +23,7 @@ function collectText(children: ReactNode): string {
 
 /**
  * Every piece of text in the app goes through here so Arabic-script content
- * (Uyghur, Arabic, Urdu, Persian) always renders in Noto Sans Arabic while
+ * (Uyghur, Arabic, Urdu) always renders in Noto Sans Arabic while
  * Latin and Cyrillic text renders in Inter. Mixed strings pick the Arabic
  * face, which carries Latin glyphs too.
  */

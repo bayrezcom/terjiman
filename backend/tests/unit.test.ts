@@ -105,12 +105,12 @@ describe('script heuristics', () => {
 describe('language registry', () => {
   it('exposes every initial language', () => {
     expect(supportedCodes()).toEqual([
-      'ug', 'tr', 'en', 'ar', 'zh-Hans', 'zh-Hant', 'ur', 'ru', 'kk', 'uz', 'fa', 'fr', 'de', 'es',
+      'ug', 'tr', 'en', 'ar', 'zh-Hans', 'zh-Hant', 'ur', 'ru', 'kk', 'uz', 'fr', 'de', 'es',
     ]);
   });
 
   it('marks the RTL languages', () => {
-    for (const code of ['ug', 'ar', 'ur', 'fa']) {
+    for (const code of ['ug', 'ar', 'ur']) {
       expect(findLanguage(code)?.direction).toBe('rtl');
     }
     for (const code of ['en', 'tr', 'zh-Hans', 'ru']) {

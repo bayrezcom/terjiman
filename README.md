@@ -12,7 +12,7 @@ languages available from day one.
 
 Uyghur is the priority language. That shows up in three concrete places: a
 translator prompt that tells the model exactly how Uyghur differs from Arabic,
-Persian, Turkish and Uzbek; a deterministic script check that corrects the model
+Urdu, Turkish and Uzbek; a deterministic script check that corrects the model
 when it labels Uyghur text as Arabic; and per-element RTL rendering with a real
 Arabic-script font.
 
@@ -22,7 +22,7 @@ which holds the credentials.
 ## Features
 
 **Translation**
-- 14 languages, Auto Detect, and an intelligent swap that never produces an
+- 13 languages, Auto Detect, and an intelligent swap that never produces an
   impossible pair
 - Loading, error, empty and offline states everywhere
 - Cancel an in-flight translation; duplicate submits are dropped
@@ -59,7 +59,7 @@ which holds the credentials.
 │   │   │   ├── ai/             AIProvider · OpenAIProvider · AnthropicProvider · MockProvider
 │   │   │   ├── TranslationService.ts
 │   │   │   ├── textCleanup.ts       strips model preambles, fences, stray quotes
-│   │   │   └── scriptHeuristics.ts  Uyghur vs Arabic/Persian/Urdu detection
+│   │   │   └── scriptHeuristics.ts  Uyghur vs Arabic/Urdu detection
 │   │   ├── prompts/translator.ts    the translation system prompt
 │   │   ├── middleware/         rateLimit · errorHandler
 │   │   ├── config/             env · languages
@@ -84,7 +84,8 @@ which holds the credentials.
 │   └── app.json · eas.json · .env.example
 │
 ├── site/                       Marketing site for terjiman.bayrez.com
-│   ├── index.html              One static page: TR / EN / UG, no build step
+│   ├── index.html              One static page, Uyghur-first (UG / TR / EN)
+│   ├── robots.txt · sitemap.xml
 │   └── Dockerfile · nginx.conf
 │
 └── docs/DEPLOYMENT.md          Docker & Coolify

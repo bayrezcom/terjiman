@@ -25,7 +25,7 @@ export function looksLikeUyghur(text: string): boolean {
   return UYGHUR_ONLY_LETTERS.test(text) || UYGHUR_HAMZA_VOWEL.test(text);
 }
 
-const ARABIC_SCRIPT_LANGUAGES = new Set(['ar', 'fa', 'ur', 'ug']);
+const ARABIC_SCRIPT_LANGUAGES = new Set(['ar', 'ur', 'ug']);
 
 /**
  * Overrides a detected language code when the script evidence is unambiguous.

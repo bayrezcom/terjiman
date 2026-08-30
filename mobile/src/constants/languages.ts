@@ -100,14 +100,6 @@ export const LANGUAGES: readonly Language[] = [
     placeholder: "Tarjima qilinadigan matnni kiriting...",
   },
   {
-    code: 'fa',
-    name: 'فارسی',
-    englishName: 'Persian',
-    direction: 'rtl',
-    speechLocale: 'fa-IR',
-    placeholder: 'متن مورد نظر برای ترجمه را وارد کنید...',
-  },
-  {
     code: 'fr',
     name: 'Français',
     englishName: 'French',
