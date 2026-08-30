@@ -95,7 +95,10 @@ Başlıklar üç parçaya bölünmüştür (`t1`, `t2`, `t3`) — çünkü marka
 başlıkta **tek** bir ifadenin deep teal olmasını istiyor; teal olan parça
 `t2`'dir.
 
-Uygurcada şirket adı **بايرېز FZE LLC** olarak yazılır (`foot.company`).
+Footer'daki şirket adı dile göre değişir (`foot.company`): Uygurcada
+**بايرېز**, Türkçede **BAYREZ**, İngilizcede tam yasal ad **BAYREZ FZE LLC**.
+JSON-LD'deki `publisher` kaydı arama motorları için her zaman tam yasal adı
+taşır.
 
 ## Bağlantılar
 
