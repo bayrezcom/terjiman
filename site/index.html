@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="tr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Terjiman by BR — Uygurca, Türkçe, İngilizce, Arapça ve Çince arasında bağlamı koruyan yapay zekâ çeviri uygulaması. BAYREZ ürünü.">
+<meta name="theme-color" content="#4A2461">
+<link rel="icon" href="favicon.png" type="image/png">
+<meta property="og:title" content="Terjiman by BR">
+<meta property="og:description" content="Uygurcayı gerçekten bilen yapay zekâ çevirmen. Bir BAYREZ ürünü.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://terjiman.bayrez.com/">
+<meta property="og:image" content="https://terjiman.bayrez.com/icon.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>Terjiman by BR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap">
+<style>
+  /* ---- Tokens -----------------------------------------------------------
+     The dark band colours are fixed: the hero and footer are a deliberate
+     committed surface in both themes. Only the page surfaces swap.          */
+  :root {
+    --ink: #100C15;
+    --ink-2: #1A1522;
+    --ink-3: #241C2E;
+    --on-ink: #F4F1F8;
+    --on-ink-muted: #B3A9C0;
+    --royal: #4A2461;
+    --plum: #7D2C94;
+    --orchid: #AA72B4;
+    --azure: #2760AB;
+    --azure-2: #3171B3;
+
+    --bg: #FBFAFD;
+    --surface: #FFFFFF;
+    --surface-2: #F4F1F8;
+    --text: #191223;
+    --muted: #5F5870;
+    --subtle: #8A8397;
+    --border: #E7E3EE;
+    --accent: #4A2461;
+    --accent-soft: #F3EEF8;
+
+    --maxw: 1120px;
+    --radius: 18px;
+    --step-0: 1rem;
+    --step-1: 1.125rem;
+    --step-2: clamp(1.35rem, 1.1rem + 1vw, 1.75rem);
+    --step-3: clamp(1.8rem, 1.3rem + 2.2vw, 2.75rem);
+    --step-4: clamp(2.4rem, 1.5rem + 4.2vw, 4.25rem);
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --arabic: "Noto Sans Arabic", "Geeza Pro", "Tahoma", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0B0810;
+      --surface: #15111E;
+      --surface-2: #1D1728;
+      --text: #F4F1F8;
+      --muted: #B4ABC0;
+      --subtle: #8F87A0;
+      --border: #2A2235;
+      --accent: #C79AD6;
+      --accent-soft: #1E1729;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0B0810;
+    --surface: #15111E;
+    --surface-2: #1D1728;
+    --text: #F4F1F8;
+    --muted: #B4ABC0;
+    --subtle: #8F87A0;
+    --border: #2A2235;
+    --accent: #C79AD6;
+    --accent-soft: #1E1729;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: var(--step-0);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  [lang="ug"] body, body[data-lang="ug"] { font-family: var(--arabic); }
+
+  h1, h2, h3 { text-wrap: balance; margin: 0; line-height: 1.15; letter-spacing: -0.02em; }
+  p { margin: 0; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--orchid); outline-offset: 3px; border-radius: 6px; }
+
+  .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  .eyebrow {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--orchid);
+  }
+  .ar { font-family: var(--arabic); }
+
+  /* ---- Dark bands ---- */
+  .band-dark { background: var(--ink); color: var(--on-ink); }
+
+  /* ---- Nav ---- */
+  .nav {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(16, 12, 21, 0.82);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-inner { display: flex; align-items: center; gap: 24px; height: 66px; }
+  .brand { display: flex; align-items: baseline; gap: 8px; text-decoration: none; margin-inline-end: auto; }
+  .brand-mark { font-family: var(--arabic); font-size: 1.5rem; font-weight: 700; color: var(--on-ink); line-height: 1; }
+  .brand-by { font-size: 0.7rem; font-weight: 500; color: var(--on-ink-muted); letter-spacing: 0.06em; }
+  .nav-links { display: flex; gap: 22px; }
+  .nav-links a { color: var(--on-ink-muted); text-decoration: none; font-size: 0.875rem; font-weight: 500; }
+  .nav-links a:hover { color: var(--on-ink); }
+  @media (max-width: 780px) { .nav-links { display: none; } }
+
+  .langswitch { display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: rgba(255,255,255,0.07); }
+  .langswitch button {
+    font: inherit; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em;
+    padding: 5px 11px; border: 0; border-radius: 999px; cursor: pointer;
+    background: transparent; color: var(--on-ink-muted);
+  }
+  .langswitch button[aria-pressed="true"] { background: var(--on-ink); color: var(--ink); }
+
+  /* ---- Hero ---- */
+  .hero { padding: clamp(56px, 8vw, 104px) 0 clamp(64px, 9vw, 112px); position: relative; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; inset: -40% 40% 30% -30%;
+    background: radial-gradient(closest-side, rgba(125,44,148,0.32), transparent 70%);
+    pointer-events: none;
+  }
+  .hero-grid { position: relative; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
+
+  .hero h1 { font-size: var(--step-4); font-weight: 800; margin: 18px 0 0; }
+  .hero h1 .accent { color: var(--orchid); }
+  .hero-sub { margin-top: 20px; font-size: var(--step-1); color: var(--on-ink-muted); max-width: 46ch; }
+
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 13px 22px; border-radius: 12px; text-decoration: none;
+    font-weight: 600; font-size: 0.95rem; border: 1px solid transparent;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--on-ink); color: var(--ink); }
+  .btn-ghost { border-color: rgba(255,255,255,0.22); color: var(--on-ink); }
+  .btn-ghost:hover { background: rgba(255,255,255,0.07); }
+  .store-note { margin-top: 14px; font-size: 0.8rem; color: var(--on-ink-muted); }
+
+  /* ---- Live demo card ---- */
+  .demo {
+    background: linear-gradient(160deg, var(--ink-2), var(--ink-3));
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 26px; padding: 22px;
+    box-shadow: 0 30px 70px -30px rgba(0,0,0,0.85);
+  }
+  .demo-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .demo-label { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--on-ink-muted); font-weight: 600; }
+  .demo-dot { width: 7px; height: 7px; border-radius: 50%; background: #5FD08A; box-shadow: 0 0 0 4px rgba(95,208,138,0.16); }
+  .pair { display: flex; align-items: center; gap: 10px; font-size: 0.8rem; color: var(--on-ink-muted); font-weight: 500; }
+  .pair svg { flex: none; opacity: 0.6; }
+
+  .demo-panel {
+    background: rgba(0,0,0,0.28); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px; padding: 18px; min-height: 92px;
+    display: flex; align-items: center;
+  }
+  .demo-panel + .demo-panel { margin-top: 10px; }
+  .demo-text { font-size: 1.2rem; line-height: 1.5; margin: 0; transition: opacity 0.35s ease; }
+  .demo-text.out { opacity: 0; }
+  .demo-text[dir="rtl"] { font-family: var(--arabic); }
+  .demo-out { color: var(--on-ink); font-weight: 500; }
+  .demo-in { color: var(--on-ink-muted); }
+  .demo-foot { display: flex; align-items: center; gap: 8px; margin-top: 14px; font-size: 0.72rem; color: var(--on-ink-muted); }
+  .track { flex: 1; height: 2px; background: rgba(255,255,255,0.12); border-radius: 2px; overflow: hidden; }
+  .track span { display: block; height: 100%; width: 0; background: var(--orchid); }
+  .track span.run { animation: fill 3.6s linear forwards; }
+  @keyframes fill { from { width: 0; } to { width: 100%; } }
+
+  /* ---- Sections ---- */
+  section { padding: clamp(56px, 8vw, 96px) 0; }
+  .sec-head { max-width: 40rem; margin-bottom: 40px; }
+  .sec-head h2 { font-size: var(--step-3); font-weight: 700; margin-top: 12px; }
+  .sec-head p { margin-top: 14px; color: var(--muted); font-size: var(--step-1); max-width: 54ch; }
+
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 900px) { .features { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .features { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 26px;
+  }
+  .card h3 { font-size: 1.0625rem; font-weight: 650; margin-bottom: 8px; }
+  .card p { color: var(--muted); font-size: 0.9375rem; }
+  .icon {
+    width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center;
+    background: var(--accent-soft); color: var(--accent); margin-bottom: 16px;
+  }
+
+  /* ---- Uyghur feature section ---- */
+  .uyghur { background: var(--surface-2); border-block: 1px solid var(--border); }
+  .uyghur-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
+  @media (max-width: 860px) { .uyghur-grid { grid-template-columns: 1fr; } }
+  .script-card {
+    background: var(--ink); color: var(--on-ink); border-radius: 22px;
+    padding: clamp(26px, 4vw, 40px); direction: rtl; text-align: right;
+  }
+  .script-card .big { font-family: var(--arabic); font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 700; line-height: 1.5; }
+  .script-card .sample { font-family: var(--arabic); font-size: 1.2rem; color: var(--on-ink-muted); margin-top: 18px; line-height: 2; }
+  .uy-title { font-size: var(--step-3); font-weight: 700; margin-top: 12px; }
+  .checks { list-style: none; padding: 0; margin: 26px 0 0; display: grid; gap: 16px; }
+  .checks li { display: flex; gap: 13px; align-items: flex-start; }
+  .checks strong { display: block; font-weight: 650; }
+  .checks span { color: var(--muted); font-size: 0.9375rem; }
+  .tick { flex: none; width: 21px; height: 21px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; margin-top: 3px; }
+
+  /* ---- Languages ---- */
+  .langs { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip {
+    border: 1px solid var(--border); background: var(--surface);
+    border-radius: 999px; padding: 9px 17px; font-size: 0.9375rem; font-weight: 500;
+    display: inline-flex; align-items: center; gap: 9px;
+  }
+  .chip .en { color: var(--subtle); font-size: 0.8125rem; }
+  .chip.rtl-lang { border-color: var(--accent); }
+  .chip .native { font-family: var(--arabic); }
+  .legend { margin-top: 18px; font-size: 0.8125rem; color: var(--subtle); display: flex; align-items: center; gap: 8px; }
+  .legend i { width: 26px; height: 0; border-top: 1px solid var(--accent); display: inline-block; }
+
+  /* ---- Privacy ---- */
+  .privacy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 780px) { .privacy-grid { grid-template-columns: 1fr; } }
+  .privacy-item { padding: 24px; border-radius: var(--radius); border: 1px dashed var(--border); }
+  .privacy-item h3 { font-size: 0.9375rem; font-weight: 650; margin-bottom: 7px; }
+  .privacy-item p { font-size: 0.875rem; color: var(--muted); }
+
+  /* ---- CTA band ---- */
+  .cta-band { background: linear-gradient(120deg, var(--royal), var(--azure)); color: #fff; }
+  .cta-band h2 { font-size: var(--step-3); font-weight: 700; }
+  .cta-band p { margin-top: 12px; color: rgba(255,255,255,0.82); max-width: 52ch; }
+  .cta-band .btn-primary { background: #fff; color: var(--royal); }
+
+  /* ---- Footer ---- */
+  footer { padding: 56px 0 40px; }
+  .foot-top { display: flex; flex-wrap: wrap; gap: 28px; justify-content: space-between; align-items: flex-start; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 26px; }
+  .foot-links a { color: var(--on-ink-muted); text-decoration: none; font-size: 0.875rem; }
+  .foot-links a:hover { color: var(--on-ink); }
+  .foot-bottom {
+    margin-top: 36px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between;
+    font-size: 0.8125rem; color: var(--on-ink-muted);
+  }
+  .bayrez { font-weight: 700; letter-spacing: 0.14em; font-size: 0.9375rem; color: var(--on-ink); }
+</style>
+</head>
+<body>
+<header class="nav band-dark">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark">تەرجىمان</span>
+      <span class="brand-by">by BR</span>
+    </a>
+    <nav class="nav-links" aria-label="Site">
+      <a href="#features" data-i18n="nav.features">Özellikler</a>
+      <a href="#uyghur" data-i18n="nav.uyghur">Uygurca</a>
+      <a href="#languages" data-i18n="nav.languages">Diller</a>
+      <a href="#privacy" data-i18n="nav.privacy">Gizlilik</a>
+    </nav>
+    <div class="langswitch" role="group" aria-label="Language">
+      <button type="button" data-lang-btn="tr" aria-pressed="true">TR</button>
+      <button type="button" data-lang-btn="en" aria-pressed="false">EN</button>
+      <button type="button" data-lang-btn="ug" aria-pressed="false">UG</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero band-dark">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow" data-i18n="hero.eyebrow">BAYREZ ürünü</p>
+        <h1>
+          <span data-i18n="hero.title1">Uygurcayı gerçekten bilen</span>
+          <span class="accent" data-i18n="hero.title2">çevirmen.</span>
+        </h1>
+        <p class="hero-sub" data-i18n="hero.sub">Uygurca, Türkçe, İngilizce, Arapça ve Çince arasında bağlamı, tonu ve dil bilgisini koruyan yapay zekâ çevirisi. Sohbet robotu değil — tek işi çeviri.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://bayrez.com/contact" data-i18n="hero.cta1">Erken erişim isteyin</a>
+          <a class="btn btn-ghost" href="#features" data-i18n="hero.cta2">Neler yapabildiğini görün</a>
+        </div>
+        <p class="store-note" data-i18n="hero.store">iOS ve Android sürümleri yayına hazırlanıyor.</p>
+      </div>
+
+      <div class="demo" aria-live="polite">
+        <div class="demo-head">
+          <span class="demo-label" data-i18n="demo.label">Canlı örnek</span>
+          <span class="demo-dot" aria-hidden="true"></span>
+        </div>
+        <div class="pair">
+          <span id="demo-from">English</span>
+          <svg width="15" height="10" viewBox="0 0 15 10" fill="none" aria-hidden="true"><path d="M1 5h12M9 1l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span id="demo-to">ئۇيغۇرچە</span>
+        </div>
+        <div class="demo-panel"><p class="demo-text demo-in" id="demo-source" dir="ltr">Welcome to Dubai.</p></div>
+        <div class="demo-panel"><p class="demo-text demo-out" id="demo-target" dir="rtl">دۇبەيگە خۇش كەلدىڭىز.</p></div>
+        <div class="demo-foot">
+          <span data-i18n="demo.foot">Yön, yazı tipi ve noktalama otomatik uyarlanır</span>
+          <span class="track"><span id="demo-track"></span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-i18n="features.eyebrow">Özellikler</p>
+        <h2 data-i18n="features.title">Bir çeviri uygulamasından beklediğiniz her şey, fazlası değil.</h2>
+        <p data-i18n="features.sub">Arayüz tek bir işe odaklanır: metin girin, çevirin, sonucu kullanın.</p>
+      </div>
+      <div class="features">
+        <article class="card">
+          <div class="icon" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 20 20" fill="none"><path d="M3 5h8M7 3v2m0 0c0 4-1.8 7-4 8m2-4c0 2 2 3.5 5 3.5M11 17l3.5-9 3.5 9m-6-2.5h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3 data-i18n="f1.t">Kelime kelime değil, anlam anlam</h3>
+          <p data-i18n="f1.d">Deyimler hedef dilde doğal karşılığını bulur. Özel isimler, sayılar, bağlantılar ve paragraf yapısı olduğu gibi korunur.</p>
+        </article>
+        <article class="card">
+          <div class="icon" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.2 4.9 5.3.6-4 3.6 1.1 5.2L10 13.7 5.4 16.3l1.1-5.2-4-3.6 5.3-.6L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+          <h3 data-i18n="f2.t">Uygurca birinci sınıf</h3>
+          <p data-i18n="f2.d">Uygurca; Arapça, Farsça veya Urduca değildir — Türkçe ve Özbekçe de değildir. Terjiman bu farkı bilir ve karıştırmaz.</p>
+        </article>
+        <article class="card">
+          <div class="icon" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 20 20" fill="none"><path d="M17 4H9a3 3 0 000 6h2m0-6v12m3 0h-6M4 16l3-3-3-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3 data-i18n="f3.t">Sağdan sola, doğru</h3>
+          <p data-i18n="f3.d">Uygurca ve Arapça metin doğru hizalanır. Karışık yazımlarda bile yön, noktalama ve sayılar bozulmaz.</p>
+        </article>
+        <article class="card">
+          <div class="icon" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.6"/><path d="M10 5.5V10l3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3 data-i18n="f4.t">Geçmiş ve favoriler</h3>
+          <p data-i18n="f4.d">Son 100 çeviri cihazınızda saklanır, internetsiz de açılır. Beğendiklerinizi yıldızlayın. Hesap gerekmez.</p>
+        </article>
+        <article class="card">
+          <div class="icon" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 20 20" fill="none"><rect x="7.2" y="2.5" width="5.6" height="9.5" rx="2.8" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 9.5a5.5 5.5 0 0011 0M10 15v2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <h3 data-i18n="f5.t">Sesle yazın, sesle dinleyin</h3>
+          <p data-i18n="f5.d">Mikrofona konuşun, metne dönüşsün. Çeviriyi cihazınızın sesiyle dinleyin, tek dokunuşla kopyalayın veya paylaşın.</p>
+        </article>
+        <article class="card">
+          <div class="icon" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 20 20" fill="none"><path d="M10 2.5l6 2.5v5c0 3.5-2.4 6.3-6 7.5-3.6-1.2-6-4-6-7.5V5l6-2.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M7.5 10l1.8 1.8L13 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3 data-i18n="f6.t">Anahtarlar cihazda değil</h3>
+          <p data-i18n="f6.d">Yapay zekâ anahtarları yalnızca sunucuda durur. Uygulama hiçbir kimlik bilgisi taşımaz, hiçbir hesap istemez.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="uyghur" class="uyghur">
+    <div class="wrap uyghur-grid">
+      <div class="script-card">
+        <p class="big">ئۇيغۇرچە</p>
+        <p class="sample">ياخشىمۇسىز؟ بۈگۈن قانداقراق؟<br>مەن دۇبەيدە ياشايمەن.</p>
+      </div>
+      <div>
+        <p class="eyebrow" data-i18n="uy.eyebrow">Öncelik</p>
+        <h2 class="uy-title" data-i18n="uy.title">Uygurca sonradan eklenmedi. En baştan buraya kuruldu.</h2>
+        <ul class="checks">
+          <li>
+            <span class="tick" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2l2.4 2.4L9.5 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span><strong data-i18n="uy.p1t">Modele Uygurcanın ne olmadığı öğretilir</strong><span data-i18n="uy.p1d">Çeviri talimatı; Uygurcanın Arapça, Farsça, Urduca, Türkçe ve Özbekçeden farkını açıkça tarif eder. Uygurca çıktıya Türkçe veya Özbekçe kelime karışmaz.</span></span>
+          </li>
+          <li>
+            <span class="tick" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2l2.4 2.4L9.5 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span><strong data-i18n="uy.p2t">Yazı denetimi modeli düzeltir</strong><span data-i18n="uy.p2d">Uygurcaya özgü harfler (ە ۇ ۆ ۈ ې ڭ) sunucuda kontrol edilir. Model metni yanlışlıkla Arapça sayarsa sonuç Uygurca olarak düzeltilir.</span></span>
+          </li>
+          <li>
+            <span class="tick" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2l2.4 2.4L9.5 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span><strong data-i18n="uy.p3t">Yazı tipi ve yön her satırda çözülür</strong><span data-i18n="uy.p3d">Arap yazısı için Noto Sans Arabic, Latin için Inter — hangi metnin hangisi olduğu karakter karakter belirlenir. Uygulama arayüzü de Uygurca kullanılabilir.</span></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="languages">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-i18n="langs.eyebrow">Diller</p>
+        <h2 data-i18n="langs.title">İlk sürümde 14 dil.</h2>
+        <p data-i18n="langs.sub">Her yön desteklenir — Uygurcadan Çinceye, Arapçadan Türkçeye, hepsi arasında.</p>
+      </div>
+      <div class="langs" id="lang-chips"></div>
+      <p class="legend"><i aria-hidden="true"></i><span data-i18n="langs.legend">Çerçeveli olanlar sağdan sola yazılır</span></p>
+    </div>
+  </section>
+
+  <section id="privacy">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-i18n="priv.eyebrow">Gizlilik</p>
+        <h2 data-i18n="priv.title">Metniniz sizde kalır.</h2>
+      </div>
+      <div class="privacy-grid">
+        <div class="privacy-item">
+          <h3 data-i18n="priv.1t">Sunucu metni saklamaz</h3>
+          <p data-i18n="priv.1d">Çevirdiğiniz metin isteği karşılamak için işlenir ve yanıtla birlikte biter. Kalıcı olarak kaydedilmez.</p>
+        </div>
+        <div class="privacy-item">
+          <h3 data-i18n="priv.2t">Geçmiş yalnızca cihazınızda</h3>
+          <p data-i18n="priv.2d">Çeviri geçmişi ve favoriler telefonunuzda tutulur. Siz silince veya uygulamayı kaldırınca gider.</p>
+        </div>
+        <div class="privacy-item">
+          <h3 data-i18n="priv.3t">Hesap yok, takip yok</h3>
+          <p data-i18n="priv.3d">Kayıt olmadan kullanılır. Uygulamada analitik veya takip aracı bulunmaz.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap">
+      <h2 data-i18n="cta.title">Kurumunuz için Terjiman</h2>
+      <p data-i18n="cta.sub">Kendi sunucunuzda çalıştırın, kendi alan adınıza bağlayın, kendi terminolojinize göre ayarlayın. BAYREZ kurulumdan yayına kadar üstlenir.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://bayrez.com/contact" data-i18n="cta.btn">BAYREZ ile görüşün</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="band-dark">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <div class="brand" style="margin: 0 0 8px;">
+          <span class="brand-mark">تەرجىمان</span>
+          <span class="brand-by">by BR</span>
+        </div>
+        <p style="color: var(--on-ink-muted); font-size: 0.875rem; max-width: 34ch;" data-i18n="foot.tag">Uygurca önceliğiyle geliştirilen yapay zekâ çeviri uygulaması.</p>
+      </div>
+      <nav class="foot-links" aria-label="BAYREZ">
+        <a href="https://bayrez.com">bayrez.com</a>
+        <a href="https://bayrez.com/contact" data-i18n="foot.contact">İletişim</a>
+        <a href="#privacy" data-i18n="foot.privacy">Gizlilik</a>
+        <a href="#features" data-i18n="foot.features">Özellikler</a>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <span class="bayrez">BAYREZ</span>
+      <span data-i18n="foot.rights">© 2026 BAYREZ · Dubai · Tüm hakları saklıdır.</span>
+    </div>
+  </div>
+</footer>
+<script>
+(function () {
+  "use strict";
+
+  /* Every supported language, in the order the app lists them. */
+  var LANGUAGES = [
+    { native: "ئۇيغۇرچە", en: "Uyghur", rtl: true },
+    { native: "Türkçe", en: "Turkish", rtl: false },
+    { native: "English", en: "English", rtl: false },
+    { native: "العربية", en: "Arabic", rtl: true },
+    { native: "简体中文", en: "Chinese (Simpl.)", rtl: false },
+    { native: "繁體中文", en: "Chinese (Trad.)", rtl: false },
+    { native: "اردو", en: "Urdu", rtl: true },
+    { native: "Русский", en: "Russian", rtl: false },
+    { native: "Қазақша", en: "Kazakh", rtl: false },
+    { native: "O'zbekcha", en: "Uzbek", rtl: false },
+    { native: "فارسی", en: "Persian", rtl: true },
+    { native: "Français", en: "French", rtl: false },
+    { native: "Deutsch", en: "German", rtl: false },
+    { native: "Español", en: "Spanish", rtl: false }
+  ];
+
+  var chips = document.getElementById("lang-chips");
+  LANGUAGES.forEach(function (language) {
+    var chip = document.createElement("span");
+    chip.className = "chip" + (language.rtl ? " rtl-lang" : "");
+    var native = document.createElement("span");
+    native.textContent = language.native;
+    if (language.rtl) { native.className = "native"; native.setAttribute("dir", "rtl"); }
+    var english = document.createElement("span");
+    english.className = "en";
+    english.textContent = language.en;
+    chip.appendChild(native);
+    chip.appendChild(english);
+    chips.appendChild(chip);
+  });
+
+  /* ---- Live translation demo -------------------------------------------
+     Real sentence pairs, cycling so the reader sees the direction, script
+     and typeface change — the thing the product actually does.            */
+  var PAIRS = [
+    { from: "English", to: "ئۇيغۇرچە", src: "Welcome to Dubai.", srcDir: "ltr", out: "دۇبەيگە خۇش كەلدىڭىز.", outDir: "rtl" },
+    { from: "ئۇيغۇرچە", to: "Türkçe", src: "بۈگۈن ھاۋا ناھايىتى ياخشى.", srcDir: "rtl", out: "Bugün hava çok güzel.", outDir: "ltr" },
+    { from: "العربية", to: "ئۇيغۇرچە", src: "مرحبا بكم في دبي.", srcDir: "rtl", out: "دۇبەيگە خۇش كەلدىڭىز.", outDir: "rtl" },
+    { from: "简体中文", to: "ئۇيغۇرچە", src: "欢迎来到迪拜。", srcDir: "ltr", out: "دۇبەيگە خۇش كەلدىڭىز.", outDir: "rtl" },
+    { from: "ئۇيغۇرچە", to: "English", src: "ياخشىمۇسىز؟ بۈگۈن قانداقراق؟", srcDir: "rtl", out: "Hello, how are you doing today?", outDir: "ltr" }
+  ];
+
+  var fromEl = document.getElementById("demo-from");
+  var toEl = document.getElementById("demo-to");
+  var srcEl = document.getElementById("demo-source");
+  var outEl = document.getElementById("demo-target");
+  var trackEl = document.getElementById("demo-track");
+  var index = 0;
+
+  function paint(pair) {
+    fromEl.textContent = pair.from;
+    toEl.textContent = pair.to;
+    srcEl.textContent = pair.src;
+    srcEl.setAttribute("dir", pair.srcDir);
+    outEl.textContent = pair.out;
+    outEl.setAttribute("dir", pair.outDir);
+  }
+
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  if (!reduced.matches) {
+    setInterval(function () {
+      srcEl.classList.add("out");
+      outEl.classList.add("out");
+      trackEl.classList.remove("run");
+      setTimeout(function () {
+        index = (index + 1) % PAIRS.length;
+        paint(PAIRS[index]);
+        srcEl.classList.remove("out");
+        outEl.classList.remove("out");
+        void trackEl.offsetWidth;
+        trackEl.classList.add("run");
+      }, 380);
+    }, 4000);
+    trackEl.classList.add("run");
+  }
+
+  /* ---- Interface language ---------------------------------------------- */
+  var STRINGS = {
+    en: {
+      "nav.features": "Features", "nav.uyghur": "Uyghur", "nav.languages": "Languages", "nav.privacy": "Privacy",
+      "hero.eyebrow": "A BAYREZ product",
+      "hero.title1": "The translator that actually", "hero.title2": "knows Uyghur.",
+      "hero.sub": "AI translation between Uyghur, Turkish, English, Arabic and Chinese that keeps context, tone and grammar intact. Not a chatbot — translation is the only thing it does.",
+      "hero.cta1": "Request early access", "hero.cta2": "See what it does",
+      "hero.store": "iOS and Android releases are being prepared.",
+      "demo.label": "Live example", "demo.foot": "Direction, typeface and punctuation adapt on their own",
+      "features.eyebrow": "Features",
+      "features.title": "Everything you expect from a translation app, and nothing more.",
+      "features.sub": "The interface does one job: type, translate, use the result.",
+      "f1.t": "Meaning, not word by word",
+      "f1.d": "Idioms land as the natural equivalent in the target language. Names, numbers, links and paragraph structure come through untouched.",
+      "f2.t": "Uyghur as a first language",
+      "f2.d": "Uyghur is not Arabic, Persian or Urdu — and it is not Turkish or Uzbek. Terjiman knows the difference and keeps them apart.",
+      "f3.t": "Right to left, done right",
+      "f3.d": "Uyghur and Arabic align correctly. Direction, punctuation and numbers survive even in mixed-script text.",
+      "f4.t": "History and favourites",
+      "f4.d": "Your last 100 translations stay on your device and open offline. Star the ones you need. No account required.",
+      "f5.t": "Speak it, hear it",
+      "f5.d": "Talk into the microphone and it becomes text. Listen to the translation in your device's voice, copy or share it in one tap.",
+      "f6.t": "Keys never touch the phone",
+      "f6.d": "AI credentials live only on the server. The app carries no keys and asks for no account.",
+      "uy.eyebrow": "The priority",
+      "uy.title": "Uyghur wasn't added later. It was the starting point.",
+      "uy.p1t": "The model is told what Uyghur is not",
+      "uy.p1d": "The translation instructions spell out how Uyghur differs from Arabic, Persian, Urdu, Turkish and Uzbek, so Turkish or Uzbek vocabulary never leaks into Uyghur output.",
+      "uy.p2t": "A script check corrects the model",
+      "uy.p2d": "Uyghur-only letters (ە ۇ ۆ ۈ ې ڭ) are verified on the server. If the model mistakes the text for Arabic, the result is corrected to Uyghur.",
+      "uy.p3t": "Typeface and direction resolved per line",
+      "uy.p3d": "Noto Sans Arabic for Arabic script, Inter for Latin — decided character by character. The app's own interface is available in Uyghur too.",
+      "langs.eyebrow": "Languages", "langs.title": "Fourteen languages at launch.",
+      "langs.sub": "Every direction works — Uyghur to Chinese, Arabic to Turkish, and everything between.",
+      "langs.legend": "Outlined languages are written right to left",
+      "priv.eyebrow": "Privacy", "priv.title": "Your text stays yours.",
+      "priv.1t": "The server keeps nothing",
+      "priv.1d": "Text is processed to answer the request and ends with the response. It is not stored permanently.",
+      "priv.2t": "History lives on your device",
+      "priv.2d": "Translation history and favourites stay on your phone. They go when you clear them or remove the app.",
+      "priv.3t": "No account, no tracking",
+      "priv.3d": "Use it without signing up. The app ships with no analytics or tracking SDK.",
+      "cta.title": "Terjiman for your organisation",
+      "cta.sub": "Run it on your own server, point it at your own domain, tune it to your own terminology. BAYREZ handles setup through launch.",
+      "cta.btn": "Talk to BAYREZ",
+      "foot.tag": "An AI translation app built Uyghur-first.",
+      "foot.contact": "Contact", "foot.privacy": "Privacy", "foot.features": "Features",
+      "foot.rights": "© 2026 BAYREZ · Dubai · All rights reserved."
+    },
+    ug: {
+      "nav.features": "ئىقتىدارلار", "nav.uyghur": "ئۇيغۇرچە", "nav.languages": "تىللار", "nav.privacy": "مەخپىيەتلىك",
+      "hero.eyebrow": "BAYREZ مەھسۇلاتى",
+      "hero.title1": "ئۇيغۇرچىنى راستىنلا بىلىدىغان", "hero.title2": "تەرجىمان.",
+      "hero.sub": "ئۇيغۇرچە، تۈركچە، ئىنگلىزچە، ئەرەبچە ۋە خەنزۇچە ئارىسىدا مەزمۇن، ئاھاڭ ۋە گرامماتىكىنى ساقلايدىغان ئەقلىي ئىقتىدارلىق تەرجىمە. پاراڭلىشىش روبوتى ئەمەس — بىردىنبىر ئىشى تەرجىمە.",
+      "hero.cta1": "بۇرۇنقى سىناققا قاتنىشىڭ", "hero.cta2": "نېمىلەرنى قىلالايدىغانلىقىنى كۆرۈڭ",
+      "hero.store": "iOS ۋە Android نەشرى تەييارلىنىۋاتىدۇ.",
+      "demo.label": "جانلىق مىسال", "demo.foot": "يۆنىلىش، خەت نۇسخىسى ۋە تىنىش بەلگىلىرى ئۆزلۈكىدىن ماسلىشىدۇ",
+      "features.eyebrow": "ئىقتىدارلار",
+      "features.title": "تەرجىمە دېتالىدىن كۈتكىنىڭىزنىڭ ھەممىسى، ئارتۇقچىسى يوق.",
+      "features.sub": "كۆرۈنمە يۈز پەقەت بىرلا ئىشنى قىلىدۇ: تېكىست كىرگۈزۈڭ، تەرجىمە قىلىڭ، نەتىجىنى ئىشلىتىڭ.",
+      "f1.t": "سۆزمۇسۆز ئەمەس، مەنە بويىچە",
+      "f1.d": "ئىدىئوملار نىشان تىلدىكى تەبىئىي شەكلىنى تاپىدۇ. ئىسىملار، سانلار، ئۇلانمىلار ۋە ئابزاس قۇرۇلمىسى ئۆزگەرمەيدۇ.",
+      "f2.t": "ئۇيغۇرچە بىرىنچى ئورۇندا",
+      "f2.d": "ئۇيغۇرچە ئەرەبچە، پارسچە ياكى ئۇردۇچە ئەمەس — تۈركچە ۋە ئۆزبېكچىمۇ ئەمەس. تەرجىمان بۇ پەرقنى بىلىدۇ.",
+      "f3.t": "ئوڭدىن سولغا، توغرا",
+      "f3.d": "ئۇيغۇرچە ۋە ئەرەبچە تېكىست توغرا تىزىلىدۇ. ئارىلاش تېكىستتىمۇ يۆنىلىش، تىنىش بەلگىسى ۋە سانلار بۇزۇلمايدۇ.",
+      "f4.t": "تارىخ ۋە ياقتۇرغانلار",
+      "f4.d": "ئاخىرقى 100 تەرجىمە ئۈسكۈنىڭىزدە ساقلىنىدۇ، تورسىزمۇ ئېچىلىدۇ. كېرەكلىكىنى يۇلتۇزلاڭ. ھېسابات كەرەك ئەمەس.",
+      "f5.t": "ئاۋاز بىلەن يېزىڭ، ئاڭلاڭ",
+      "f5.d": "مىكروفونغا سۆزلەڭ، تېكىستكە ئايلانسۇن. تەرجىمىنى ئۈسكۈنىڭىزنىڭ ئاۋازىدا ئاڭلاڭ، بىر چېكىشتە كۆچۈرۈڭ ياكى ھەمبەھىرلەڭ.",
+      "f6.t": "ئاچقۇچلار تېلېفوندا ئەمەس",
+      "f6.d": "AI ئاچقۇچلىرى پەقەت مۇلازىمېتىردا تۇرىدۇ. دېتال ھېچقانداق ئاچقۇچ ساقلىمايدۇ، ھېسابات سورىمايدۇ.",
+      "uy.eyebrow": "ئالدىنقى ئورۇن",
+      "uy.title": "ئۇيغۇرچە كېيىن قوشۇلغان ئەمەس. ئەڭ باشتىن مۇشۇ يەردىن باشلانغان.",
+      "uy.p1t": "مودېلغا ئۇيغۇرچىنىڭ نېمە ئەمەسلىكى ئۆگىتىلىدۇ",
+      "uy.p1d": "تەرجىمە كۆرسەتمىسى ئۇيغۇرچىنىڭ ئەرەبچە، پارسچە، ئۇردۇچە، تۈركچە ۋە ئۆزبېكچىدىن پەرقىنى ئېنىق بايان قىلىدۇ. ئۇيغۇرچە نەتىجىگە تۈركچە ياكى ئۆزبېكچە سۆز ئارىلاشمايدۇ.",
+      "uy.p2t": "يېزىق تەكشۈرۈشى مودېلنى تۈزىتىدۇ",
+      "uy.p2d": "ئۇيغۇرچىغا خاس ھەرپلەر (ە ۇ ۆ ۈ ې ڭ) مۇلازىمېتىردا تەكشۈرۈلىدۇ. مودېل تېكىستنى خاتا ھالدا ئەرەبچە دەپ قارىسا، نەتىجە ئۇيغۇرچە دەپ تۈزىتىلىدۇ.",
+      "uy.p3t": "خەت نۇسخىسى ۋە يۆنىلىش ھەر قۇردا ھەل قىلىنىدۇ",
+      "uy.p3d": "ئەرەب يېزىقىغا Noto Sans Arabic، لاتىنچىغا Inter — قايسى تېكىستنىڭ قايسى ئىكەنلىكى ھەرپمۇھەرپ بېكىتىلىدۇ. دېتال كۆرۈنمە يۈزىنىمۇ ئۇيغۇرچە ئىشلەتكىلى بولىدۇ.",
+      "langs.eyebrow": "تىللار", "langs.title": "دەسلەپكى نەشرىدە 14 تىل.",
+      "langs.sub": "ھەممە يۆنىلىش ئىشلەيدۇ — ئۇيغۇرچىدىن خەنزۇچىغا، ئەرەبچىدىن تۈركچىگە ۋە ئارىلىقتىكى ھەممىسىگە.",
+      "langs.legend": "رامكىلىق بولغانلىرى ئوڭدىن سولغا يېزىلىدۇ",
+      "priv.eyebrow": "مەخپىيەتلىك", "priv.title": "تېكىستىڭىز ئۆزىڭىزدە قالىدۇ.",
+      "priv.1t": "مۇلازىمېتىر تېكىستنى ساقلىمايدۇ",
+      "priv.1d": "تېكىست تەلەپنى ئورۇنداش ئۈچۈن بىر تەرەپ قىلىنىدۇ ۋە جاۋاب بىلەن تۈگەيدۇ. مەڭگۈلۈك ساقلانمايدۇ.",
+      "priv.2t": "تارىخ پەقەت ئۈسكۈنىڭىزدە",
+      "priv.2d": "تەرجىمە تارىخى ۋە ياقتۇرغانلار تېلېفونىڭىزدا تۇرىدۇ. ئۆزىڭىز تازىلىغاندا ياكى دېتالنى ئۆچۈرگەندە يوقىلىدۇ.",
+      "priv.3t": "ھېسابات يوق، ئىز قوغلاش يوق",
+      "priv.3d": "تىزىملاتماي ئىشلىتىلىدۇ. دېتالدا ئانالىز ياكى ئىز قوغلاش قورالى يوق.",
+      "cta.title": "ئورۇنىڭىز ئۈچۈن تەرجىمان",
+      "cta.sub": "ئۆز مۇلازىمېتىرىڭىزدا يۈرگۈزۈڭ، ئۆز دائىرە نامىڭىزغا ئۇلاڭ، ئۆز ئاتالغۇلىرىڭىزغا ماسلاشتۇرۇڭ. BAYREZ ئورنىتىشتىن تارقىتىشقىچە ھەممىسىنى ئۈستىگە ئالىدۇ.",
+      "cta.btn": "BAYREZ بىلەن سۆزلىشىڭ",
+      "foot.tag": "ئۇيغۇرچىنى ئالدىنقى ئورۇنغا قويۇپ ئىشلەنگەن ئەقلىي ئىقتىدارلىق تەرجىمە دېتالى.",
+      "foot.contact": "ئالاقە", "foot.privacy": "مەخپىيەتلىك", "foot.features": "ئىقتىدارلار",
+      "foot.rights": "© 2026 BAYREZ · دۇبەي · بارلىق ھوقۇق قوغدىلىدۇ."
+    }
+  };
+
+  /* Turkish is the markup's own text, so it is captured rather than duplicated. */
+  var nodes = Array.prototype.slice.call(document.querySelectorAll("[data-i18n]"));
+  STRINGS.tr = {};
+  nodes.forEach(function (node) {
+    STRINGS.tr[node.getAttribute("data-i18n")] = node.textContent;
+  });
+
+  var buttons = Array.prototype.slice.call(document.querySelectorAll("[data-lang-btn]"));
+
+  function setLanguage(code) {
+    var dictionary = STRINGS[code] || STRINGS.tr;
+    nodes.forEach(function (node) {
+      var value = dictionary[node.getAttribute("data-i18n")];
+      if (value) node.textContent = value;
+    });
+    document.documentElement.setAttribute("lang", code);
+    document.documentElement.setAttribute("dir", code === "ug" ? "rtl" : "ltr");
+    document.body.setAttribute("data-lang", code);
+    buttons.forEach(function (button) {
+      button.setAttribute("aria-pressed", String(button.getAttribute("data-lang-btn") === code));
+    });
+    try { localStorage.setItem("terjiman.site.lang", code); } catch (error) { /* private mode */ }
+  }
+
+  buttons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      setLanguage(button.getAttribute("data-lang-btn"));
+    });
+  });
+
+  var stored = null;
+  try { stored = localStorage.getItem("terjiman.site.lang"); } catch (error) { stored = null; }
+  if (stored && STRINGS[stored]) setLanguage(stored);
+})();
+</script>
+</body>
+</html>

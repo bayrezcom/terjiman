@@ -142,7 +142,31 @@ added:
 CORS_ORIGIN=https://app.your-domain.com,https://your-domain.com
 ```
 
-## 5. Operating notes
+## 5. The marketing site (terjiman.bayrez.com)
+
+`site/` is a single static page — no build step, no environment variables, no
+backend calls. Deploy it as a second Coolify application alongside the API:
+
+1. **Project → New Resource → Application**, same repository.
+2. Build Pack: **Dockerfile**.
+3. **Base Directory**: `site` · **Dockerfile Location**: `Dockerfile`.
+4. **Port**: `8080` (nginx-unprivileged runs as a non-root user).
+5. **Domains**: `https://terjiman.bayrez.com`, with an `A` record for
+   `terjiman` pointing at the server.
+
+Or locally:
+
+```bash
+docker build -t terjiman-site ./site
+docker run --rm -p 8080:8080 terjiman-site
+```
+
+The page offers Turkish, English and Uyghur, switches to `dir="rtl"` for
+Uyghur, and remembers the choice in the visitor's browser. See
+`site/README.md` for how to edit the copy.
+
+
+## 6. Operating notes
 
 **Logs.** Structured pino JSON on stdout. Failures log an error code, the
 route, and provider detail; `authorization` and `x-api-key` headers are

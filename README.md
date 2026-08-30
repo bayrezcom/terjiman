@@ -83,6 +83,10 @@ which holds the credentials.
 │   ├── __tests__/              54 tests (jest-expo)
 │   └── app.json · eas.json · .env.example
 │
+├── site/                       Marketing site for terjiman.bayrez.com
+│   ├── index.html              One static page: TR / EN / UG, no build step
+│   └── Dockerfile · nginx.conf
+│
 └── docs/DEPLOYMENT.md          Docker & Coolify
 ```
 
@@ -218,7 +222,8 @@ app shows a friendly message. Text translation is unaffected either way.
 
 ## Deployment
 
-See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) for Docker and Coolify.
+See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) for Docker and Coolify — it
+covers both the backend and the marketing site at `terjiman.bayrez.com`.
 
 Quick version:
 
