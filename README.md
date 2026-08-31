@@ -224,6 +224,47 @@ AI_PROVIDER=anthropic   AI_MODEL=claude-sonnet-4-5  AI_API_KEY=sk-ant-...
 Both providers are called over their REST APIs with `fetch`, so no vendor SDK
 is installed for a provider you are not using.
 
+### Any OpenAI-compatible service
+
+`AI_BASE_URL` points the OpenAI provider somewhere else, which covers most of
+the market — including services with a free tier:
+
+```bash
+# Google Gemini (free tier available)
+AI_PROVIDER=openai
+AI_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai
+AI_MODEL=gemini-2.0-flash
+AI_API_KEY=...
+
+# Groq (free tier, very fast, smaller models)
+AI_PROVIDER=openai
+AI_BASE_URL=https://api.groq.com/openai/v1
+AI_MODEL=llama-3.3-70b-versatile
+AI_API_KEY=gsk_...
+
+# OpenRouter (routes to many models, some free)
+AI_PROVIDER=openai
+AI_BASE_URL=https://openrouter.ai/api/v1
+AI_MODEL=...
+AI_API_KEY=sk-or-...
+```
+
+Two things to weigh before picking on price alone:
+
+**Uyghur quality is not uniform.** Uyghur is a low-resource language, and small
+or heavily-quantized models handle it far worse than frontier ones — they drift
+into Turkish or Uzbek vocabulary, or produce Arabic-looking text that is not
+Uyghur. Since Uyghur is this app's reason to exist, test a candidate model with
+real sentences before committing. `POST /api/translate` is enough to compare.
+
+**Voice input needs an audio endpoint.** `/api/transcribe` calls
+`/audio/transcriptions`, which not every OpenAI-compatible service implements.
+Text translation is unaffected; voice input returns a friendly error when the
+service does not support it.
+
+Free tiers and their limits change often — check the provider's current terms
+rather than trusting this list.
+
 **Adding a provider:** implement `AIProvider` (`complete`, `transcribe`,
 `supportsTranscription`) in `backend/src/services/ai/`, add one `case` to
 `createProvider.ts`, and add the name to `readProvider()` in `config/env.ts`.
