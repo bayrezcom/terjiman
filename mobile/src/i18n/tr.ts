@@ -2,9 +2,9 @@ import type { Translations } from './en';
 
 const tr: Translations = {
   common: {
-    appName: 'Terjiman',
-    company: 'BAYREZ',
-    tagline: 'Yapay Zekâ Çevirmen',
+    appName: 'Tercüman',
+    company: 'Bayrez',
+    tagline: 'Uygur Çevirmen',
     cancel: 'İptal',
     delete: 'Sil',
     close: 'Kapat',

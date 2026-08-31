@@ -5,8 +5,8 @@
 const en = {
   common: {
     appName: 'Terjiman',
-    company: 'BAYREZ',
-    tagline: 'AI Translator',
+    company: 'Bayrez',
+    tagline: 'Uyghur Translator',
     cancel: 'Cancel',
     delete: 'Delete',
     close: 'Close',

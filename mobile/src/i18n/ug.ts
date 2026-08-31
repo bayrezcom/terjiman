@@ -8,7 +8,7 @@ const ug: Translations = {
   common: {
     appName: 'تەرجىمان',
     company: 'بايرېز',
-    tagline: 'ئەقلىي ئىقتىدارلىق تەرجىمان',
+    tagline: 'ئۇيغۇر تەرجىمان',
     cancel: 'بىكار قىلىش',
     delete: 'ئۆچۈرۈش',
     close: 'تاقاش',
