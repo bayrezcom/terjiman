@@ -290,6 +290,21 @@ script narrows the field so a person only has to read the survivors.
 
 `models.json` is git-ignored, since it names your key variables.
 
+`scripts/models.example.json` is a menu, not a recommendation — trim it to the
+keys you hold. It includes the frontier models as a baseline and several
+Chinese providers, which are worth testing here specifically: Uyghur is a
+language of China, so those labs plausibly trained on more of it than Western
+ones did, and at least one vendor has aimed a translation line at China's
+minority languages. Plausible is not measured, which is what the script is for.
+
+Endpoints and model names move; if a candidate fails to connect, check the
+provider's current documentation rather than assuming the model is bad.
+
+One consideration that is not technical: most of this app's users are Uyghur,
+many of them diaspora, and their text would be processed on the chosen
+provider's infrastructure. Some will care where that is. It is your call, but
+make it deliberately.
+
 **Adding a provider:** implement `AIProvider` (`complete`, `transcribe`,
 `supportsTranscription`) in `backend/src/services/ai/`, add one `case` to
 `createProvider.ts`, and add the name to `readProvider()` in `config/env.ts`.

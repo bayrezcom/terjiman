@@ -2,24 +2,78 @@
   {
     "label": "gpt-4o",
     "model": "gpt-4o",
-    "apiKeyEnv": "OPENAI_API_KEY"
-  },
-  {
-    "label": "gemini",
-    "model": "gemini-2.0-flash",
-    "baseUrl": "https://generativelanguage.googleapis.com/v1beta/openai",
-    "apiKeyEnv": "GEMINI_API_KEY"
-  },
-  {
-    "label": "qwen-plus",
-    "model": "qwen-plus",
-    "baseUrl": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
-    "apiKeyEnv": "DASHSCOPE_API_KEY"
+    "apiKeyEnv": "OPENAI_API_KEY",
+    "note": "Frontier baseline. Compare the others against this."
   },
   {
     "label": "claude",
     "provider": "anthropic",
     "model": "claude-sonnet-4-5",
-    "apiKeyEnv": "ANTHROPIC_API_KEY"
+    "apiKeyEnv": "ANTHROPIC_API_KEY",
+    "note": "Frontier baseline."
+  },
+  {
+    "label": "gemini",
+    "model": "gemini-2.0-flash",
+    "baseUrl": "https://generativelanguage.googleapis.com/v1beta/openai",
+    "apiKeyEnv": "GEMINI_API_KEY",
+    "note": "Has a free tier."
+  },
+
+  {
+    "label": "qwen-plus",
+    "model": "qwen-plus",
+    "baseUrl": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
+    "apiKeyEnv": "DASHSCOPE_API_KEY",
+    "note": "Alibaba. Avoid the thinking variants: they can require streaming, which this backend does not use."
+  },
+  {
+    "label": "qwen-mt",
+    "model": "qwen-mt-plus",
+    "baseUrl": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
+    "apiKeyEnv": "DASHSCOPE_API_KEY",
+    "note": "Alibaba's translation-specialised line. May expect its own options; if it errors, drop it."
+  },
+  {
+    "label": "deepseek",
+    "model": "deepseek-chat",
+    "baseUrl": "https://api.deepseek.com/v1",
+    "apiKeyEnv": "DEEPSEEK_API_KEY",
+    "note": "Inexpensive."
+  },
+  {
+    "label": "glm",
+    "model": "glm-4-plus",
+    "baseUrl": "https://open.bigmodel.cn/api/paas/v4",
+    "apiKeyEnv": "ZHIPU_API_KEY",
+    "note": "Zhipu / BigModel."
+  },
+  {
+    "label": "moonshot",
+    "model": "moonshot-v1-8k",
+    "baseUrl": "https://api.moonshot.cn/v1",
+    "apiKeyEnv": "MOONSHOT_API_KEY",
+    "note": "Kimi."
+  },
+  {
+    "label": "hunyuan",
+    "model": "hunyuan-turbos-latest",
+    "baseUrl": "https://api.hunyuan.cloud.tencent.com/v1",
+    "apiKeyEnv": "HUNYUAN_API_KEY",
+    "note": "Tencent. Their translation line has been aimed at China's minority languages, Uyghur among them — worth testing for exactly that reason."
+  },
+  {
+    "label": "doubao",
+    "model": "doubao-pro-32k",
+    "baseUrl": "https://ark.cn-beijing.volces.com/api/v3",
+    "apiKeyEnv": "ARK_API_KEY",
+    "note": "ByteDance / Volcengine."
+  },
+  {
+    "label": "siliconflow",
+    "model": "Qwen/Qwen2.5-72B-Instruct",
+    "baseUrl": "https://api.siliconflow.cn/v1",
+    "apiKeyEnv": "SILICONFLOW_API_KEY",
+    "note": "Hosts many open models, so it is a cheap way to try a translation-specialised one."
   }
 ]
