@@ -183,6 +183,16 @@ cd mobile
 npx expo start       # then press i / a, or scan the QR code
 ```
 
+Fastest look with no phone and no Xcode — the app also runs in a browser:
+
+```bash
+cd mobile
+npm run web          # http://localhost:8081
+```
+
+The web target is for checking layout, RTL, history and settings. Voice input,
+text-to-speech and haptics are device features and do not work there.
+
 Simulators and emulators reach `http://localhost:3000`. A physical device needs
 your machine's LAN IP:
 
@@ -197,6 +207,7 @@ cd backend  && npm run typecheck && npm test    # 49 tests
 cd ../mobile && npm run typecheck && npm test    # 54 tests
 cd mobile && npx expo-doctor                     # 21/21 checks
 cd mobile && npx expo export --platform android  # full Metro bundle
+cd mobile && npx expo export --platform web      # browser build
 ```
 
 ## AI provider configuration
