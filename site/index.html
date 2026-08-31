@@ -378,7 +378,7 @@
 <body data-lang="ug">
 <header class="nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="#top" aria-label="Terjiman">
+    <a class="brand" href="#top">
       <svg class="mark" viewBox="0 0 512 512" aria-hidden="true">
         <rect x="72" y="104" width="256" height="176" rx="52" fill="#DDF2EC"/>
         <path d="M112 268 L112 340 L172 282 Z" fill="#DDF2EC"/>
@@ -602,7 +602,7 @@
         </div>
         <p style="color: var(--navy-soft); font-size: 0.875rem; max-width: 32ch;" data-i18n="foot.tag">ئۇيغۇرچىنى ئالدىنقى ئورۇنغا قويۇپ ئىشلەنگەن ئەقلىي ئىقتىدارلىق تەرجىمە دېتالى.</p>
       </div>
-      <nav class="foot-links" aria-label="Terjiman">
+      <nav class="foot-links" data-i18n-aria="nav.aria">
         <a href="#features" data-i18n="foot.features">ئىقتىدارلار</a>
         <a href="#languages" data-i18n="foot.languages">تىللار</a>
         <a href="#privacy" data-i18n="foot.privacy">مەخپىيەتلىك</a>
@@ -699,6 +699,7 @@
   /* ---- Interface language ---------------------------------------------- */
   var STRINGS = {
     tr: {
+      "nav.aria": "Tercüman",
       "brand.name": "Tercüman",
       "brand.company": "Bayrez",
       "nav.features": "Özellikler",
@@ -760,7 +761,7 @@
       "priv.2d": "Siz silene veya uygulamayı kaldırana kadar telefonunuzda kalır.",
       "priv.3t": "Hesap yok, takip yok",
       "priv.3d": "Kayıt istemez; analitik veya takip aracı içermez.",
-      "dl.t1": "Terjiman'ı",
+      "dl.t1": "Tercüman'ı",
       "dl.t2": "telefonunuza",
       "dl.t3": "alın.",
       "dl.sub": "Ücretsiz. Hesap yok. Reklam yok.",
@@ -775,6 +776,7 @@
       "foot.rights": "© 2026 · Dubai · Tüm hakları saklıdır."
     },
     en: {
+      "nav.aria": "Terjiman",
       "brand.name": "Terjiman",
       "brand.company": "Bayrez",
       "nav.features": "Features",
@@ -836,9 +838,9 @@
       "priv.2d": "It stays on your phone until you clear it or remove the app.",
       "priv.3t": "No account, no tracking",
       "priv.3d": "No sign-up, and no analytics or tracking SDK.",
-      "dl.t1": "Put Terjiman",
-      "dl.t2": "in your pocket",
-      "dl.t3": ".",
+      "dl.t1": "Put",
+      "dl.t2": "Terjiman",
+      "dl.t3": "in your pocket.",
       "dl.sub": "Free. No account. No ads.",
       "dl.note": "The links will appear here once the releases are live.",
       "foot.tag": "An AI translation app built Uyghur-first.",
@@ -855,10 +857,12 @@
   /* Uyghur is the site's main language and lives in the markup itself, so it
      is captured from the DOM rather than duplicated in the dictionary. */
   var nodes = Array.prototype.slice.call(document.querySelectorAll("[data-i18n]"));
+  var ariaNodes = Array.prototype.slice.call(document.querySelectorAll("[data-i18n-aria]"));
   STRINGS.ug = {};
   nodes.forEach(function (node) {
     STRINGS.ug[node.getAttribute("data-i18n")] = node.textContent;
   });
+  STRINGS.ug["nav.aria"] = "تەرجىمان";
 
   var buttons = Array.prototype.slice.call(document.querySelectorAll("[data-lang-btn]"));
 
@@ -867,6 +871,10 @@
     nodes.forEach(function (node) {
       var value = dictionary[node.getAttribute("data-i18n")];
       if (value) node.textContent = value;
+    });
+    ariaNodes.forEach(function (node) {
+      var value = dictionary[node.getAttribute("data-i18n-aria")];
+      if (value) node.setAttribute("aria-label", value);
     });
     document.documentElement.setAttribute("lang", code);
     document.documentElement.setAttribute("dir", code === "ug" ? "rtl" : "ltr");
