@@ -75,7 +75,9 @@ would throttle all users as one.
 
 ### Domain and HTTPS
 
-1. Set **Domains** to `https://api.your-domain.com`.
+1. Set **Domains** to `https://api.terjiman.bayrez.com`. The API is scoped to the
+   product rather than to the company, so a second Bayrez product can have its
+   own API host later.
 2. Point an `A` record at the server's IP.
 3. Coolify requests a Let's Encrypt certificate automatically once DNS
    resolves. Leave **Force HTTPS** on.
@@ -100,7 +102,7 @@ than a crash loop.
 Press **Deploy**. Then:
 
 ```bash
-curl https://api.your-domain.com/api/health
+curl https://api.terjiman.bayrez.com/api/health
 ```
 
 ```json
@@ -109,16 +111,21 @@ curl https://api.your-domain.com/api/health
 
 ## 3. Point the app at it
 
-Set the URL for each EAS build profile in `mobile/eas.json`:
+The store profiles read the URL from the project's EAS environment rather than
+from `eas.json`, so set it once:
 
-```json
-{
-  "build": {
-    "preview":    { "env": { "EXPO_PUBLIC_API_URL": "https://api.your-domain.com" } },
-    "production": { "env": { "EXPO_PUBLIC_API_URL": "https://api.your-domain.com" } }
-  }
-}
+```bash
+cd mobile
+eas env:create --name EXPO_PUBLIC_API_URL --value https://api.terjiman.bayrez.com \
+  --environment production --visibility plaintext
+eas env:create --name EXPO_PUBLIC_API_URL --value https://api.terjiman.bayrez.com \
+  --environment preview --visibility plaintext
 ```
+
+A pre-install hook refuses to build a `preview` or `production` app when that
+value is missing, is not https, or still points at a placeholder or a local
+address — the URL is baked into the bundle, so a wrong one can only be fixed
+with a new release.
 
 Then build:
 

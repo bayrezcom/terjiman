@@ -257,8 +257,15 @@ eas build --platform android --profile preview   # installable APK
 eas build --platform ios
 ```
 
-Set `EXPO_PUBLIC_API_URL` for each profile in `eas.json` before building —
-`preview` and `production` currently point at `https://api.example.com`.
+Set `EXPO_PUBLIC_API_URL` once in the EAS environment before building; the
+store profiles read it from there rather than from `eas.json`:
+
+```bash
+eas env:create --name EXPO_PUBLIC_API_URL --value https://api.terjiman.bayrez.com \
+  --environment production --visibility plaintext
+```
+
+A pre-install hook fails the build if it is missing or still a placeholder.
 
 App identity: launcher and store name `Terjiman` (one script, so the icon
 caption stays short on every device), slug `terjiman-by-br`, bundle id and
