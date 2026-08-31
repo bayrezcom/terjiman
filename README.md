@@ -265,6 +265,31 @@ service does not support it.
 Free tiers and their limits change often — check the provider's current terms
 rather than trusting this list.
 
+### Choosing on evidence
+
+There is no trustworthy public benchmark for Uyghur translation quality across
+models, and reputation is a poor guide for a low-resource language. Rather than
+guess, run the candidates against the same sentences:
+
+```bash
+cd backend
+cp scripts/models.example.json models.json   # add your key variable names
+OPENAI_API_KEY=... GEMINI_API_KEY=... npx tsx scripts/compare-models.ts models.json
+```
+
+Every candidate goes through the app's real TranslationService — same prompt,
+same cleanup, same validation — so the output is what users would receive. The
+cases are chosen to expose how models actually fail at Uyghur: writing Arabic
+instead, drifting into Turkish or Uzbek, losing names and numbers, flattening
+register.
+
+The script checks objectively for wrong script, dropped fragments and
+untranslated echoes, and reports latency. It cannot judge whether the Uyghur
+reads naturally — that still needs a native speaker, which is the point: the
+script narrows the field so a person only has to read the survivors.
+
+`models.json` is git-ignored, since it names your key variables.
+
 **Adding a provider:** implement `AIProvider` (`complete`, `transcribe`,
 `supportsTranscription`) in `backend/src/services/ai/`, add one `case` to
 `createProvider.ts`, and add the name to `readProvider()` in `config/env.ts`.

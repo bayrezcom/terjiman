@@ -43,3 +43,6 @@ Thumbs.db
 *.swp
 .idea/
 .vscode/
+
+# Model comparison config — names your key variables, so it stays local.
+backend/models.json
