@@ -31,7 +31,7 @@ koyu olsa bile kanvas off-white kalır.
 
 ### Şahin filigranı — eksik parça
 
-Sistem, 8% opaklıkta bir köşede BAYREZ şahin siluetini istiyor. Elimde asıl
+Sistem, 8% opaklıkta bir köşede Bayrez şahin siluetini istiyor. Elimde asıl
 şahin varlığı olmadığı için **yer tutucu bırakılmıştır**: `.falcon` sınıfının
 stili hazır, işaretleme boş. Gerçek SVG'yi `.hero`, `.uyghur` veya
 `.download` içine `<svg class="falcon">` olarak koymanız yeterli — bölüm
@@ -96,7 +96,7 @@ başlıkta **tek** bir ifadenin deep teal olmasını istiyor; teal olan parça
 `t2`'dir.
 
 Footer'daki şirket adı dile göre değişir (`foot.company`): Uygurcada
-**بايرېز**, Türkçede **BAYREZ**, İngilizcede tam yasal ad **BAYREZ FZE LLC**.
+**بايرېز**, Türkçede **Bayrez**, İngilizcede tam yasal ad **Bayrez FZE LLC**.
 JSON-LD'deki `publisher` kaydı arama motorları için her zaman tam yasal adı
 taşır.
 
@@ -104,7 +104,7 @@ taşır.
 
 Site dışına yalnızca iki bağlantı çıkar:
 
-- Footer'daki **BAYREZ FZE LLC** → `bayrez.com` (BAYREZ kim sorusunun cevabı)
+- Footer'daki şirket adı → `bayrez.com` (Bayrez kim sorusunun cevabı)
 - **hello@bayrez.com** → `mailto:`
 
 Başka geri bağlantı yoktur; `/contact-us/` gibi adresler bilinçli olarak

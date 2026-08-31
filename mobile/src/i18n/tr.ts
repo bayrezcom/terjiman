@@ -89,7 +89,7 @@ const tr: Translations = {
   about: {
     title: 'Hakkında',
     intro:
-      'Terjiman by BR; Uygurca, Türkçe, İngilizce, Arapça, Çince ve daha fazlası arasında yüksek kaliteli çeviri için tasarlanmış odaklı bir yapay zekâ çevirmenidir.',
+      'Tercüman; Uygurca, Türkçe, İngilizce, Arapça, Çince ve daha fazlası arasında yüksek kaliteli çeviri için tasarlanmış odaklı bir yapay zekâ çevirmenidir.',
     privacyTitle: 'Gizlilik Politikası',
     privacyBody:
       'Çevirdiğiniz metin HTTPS üzerinden Terjiman sunucusuna gönderilir; sunucu metni yapılandırılmış yapay zekâ sağlayıcısına iletir ve çeviriyi döndürür. Sunucu metninizi kalıcı olarak saklamaz. Çeviri geçmişiniz ve favorileriniz yalnızca bu cihazda tutulur; sildiğinizde veya uygulamayı kaldırdığınızda yok olur. Yapay zekâ sağlayıcısı kimlik bilgileri hiçbir zaman uygulamada saklanmaz. Hesap gerekmez.',
@@ -120,7 +120,7 @@ const tr: Translations = {
   share: {
     original: 'Orijinal',
     translation: 'Çeviri',
-    signature: 'Terjiman by BR ile çevrildi',
+    signature: 'Tercüman ile çevrildi — Bayrez',
   },
 };
 

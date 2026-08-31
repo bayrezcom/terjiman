@@ -91,7 +91,7 @@ const en = {
   about: {
     title: 'About',
     intro:
-      'Terjiman by BR is a focused AI translator built for high-quality translation between Uyghur, Turkish, English, Arabic, Chinese and more.',
+      'Terjiman is a focused AI translator built for high-quality translation between Uyghur, Turkish, English, Arabic, Chinese and more.',
     privacyTitle: 'Privacy Policy',
     privacyBody:
       'Text you translate is sent over HTTPS to the Terjiman backend, which forwards it to the configured AI provider and returns the translation. The backend does not permanently store your text. Your translation history and favorites are stored only on this device and are deleted when you clear them or uninstall the app. AI provider credentials are never stored in the app. No account is required.',
@@ -122,7 +122,7 @@ const en = {
   share: {
     original: 'Original',
     translation: 'Translation',
-    signature: 'Translated by Terjiman by BR',
+    signature: 'Translated with Terjiman — Bayrez',
   },
 };
 

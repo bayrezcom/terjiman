@@ -2,7 +2,7 @@
   "name": "terjiman-backend",
   "version": "1.0.0",
   "private": true,
-  "description": "Secure AI translation backend for Terjiman by BR",
+  "description": "Secure AI translation backend for Terjiman — Uyghur Translator",
   "type": "module",
   "main": "dist/server.js",
   "engines": {

@@ -1,11 +1,12 @@
-<h1 align="center">تەرجىمان by BR</h1>
-<p align="center"><strong>Terjiman by BR</strong> — an AI translator for iOS and Android, built for Uyghur first.</p>
+<h1 align="center">Terjiman</h1>
+<p align="center"><strong>Uyghur Translator</strong> — an AI translator for iOS and Android, built for Uyghur first.</p>
+<p align="center"><sub>ئۇيغۇر تەرجىمان · بايرېز</sub></p>
 
 ---
 
 ## Overview
 
-Terjiman by BR is a focused translation utility — not a chatbot. The whole app
+Terjiman is a focused translation utility — not a chatbot. The whole app
 is one gesture: **text → Translate → result**. It targets high-quality
 translation between Uyghur, Turkish, English, Arabic and Chinese, with ten more
 languages available from day one.
@@ -259,8 +260,10 @@ eas build --platform ios
 Set `EXPO_PUBLIC_API_URL` for each profile in `eas.json` before building —
 `preview` and `production` currently point at `https://api.example.com`.
 
-App identity: name `Terjiman by BR`, iOS display name `تەرجىمان by BR`, slug
-`terjiman-by-br`, bundle id and Android package `com.bayrez.terjiman`.
+App identity: launcher and store name `Terjiman` (one script, so the icon
+caption stays short on every device), slug `terjiman-by-br`, bundle id and
+Android package `com.bayrez.terjiman`. The localized store listing titles are
+in [`docs/BRAND-NAMES.md`](docs/BRAND-NAMES.md).
 Replace the placeholder `extra.eas.projectId` in `app.json` with the id
 `eas build:configure` gives you.
 
@@ -304,6 +307,13 @@ Deliberately not in the MVP, but the architecture leaves room:
   a `formality` hint and can take a domain the same way
 - Web app and browser extension against the same API
 
+## Naming
+
+Every language has one fixed set of names — product, descriptor, company — and
+no user-facing string ever mixes scripts. The full table, including the nine
+languages the interface does not ship yet, is in
+[`docs/BRAND-NAMES.md`](docs/BRAND-NAMES.md).
+
 ## Notes and limitations
 
 - **Uyghur UI strings were hand-written, not machine-translated, but have not
@@ -319,4 +329,4 @@ Deliberately not in the MVP, but the architecture leaves room:
 
 ---
 
-<p align="center"><sub>Terjiman by BR — built by BAYREZ.</sub></p>
+<p align="center"><sub>Terjiman — built by Bayrez.</sub></p>

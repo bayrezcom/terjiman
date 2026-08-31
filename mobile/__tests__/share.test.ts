@@ -3,7 +3,7 @@ import { buildShareMessage } from '../src/services/share';
 const labels = {
   original: 'Original',
   translation: 'Translation',
-  signature: 'Translated by Terjiman by BR',
+  signature: 'Translated with Terjiman — Bayrez',
 };
 
 describe('buildShareMessage', () => {
