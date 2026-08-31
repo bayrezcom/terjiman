@@ -16,18 +16,26 @@
       "android": {
         "buildType": "apk"
       },
-      "env": {
-        "EXPO_PUBLIC_API_URL": "https://api.example.com"
-      }
+      "environment": "preview"
     },
     "production": {
       "autoIncrement": true,
-      "env": {
-        "EXPO_PUBLIC_API_URL": "https://api.example.com"
-      }
+      "environment": "production"
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "android": {
+        "//": "Path to the Google Play service-account JSON, kept out of git.",
+        "serviceAccountKeyPath": "../play-service-account.json",
+        "track": "internal"
+      },
+      "ios": {
+        "//": "Fill these in from App Store Connect, or omit and let EAS prompt.",
+        "appleId": "",
+        "ascAppId": "",
+        "appleTeamId": ""
+      }
+    }
   }
 }
