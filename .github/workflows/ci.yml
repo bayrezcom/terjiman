@@ -1,0 +1,113 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  backend:
+    name: Backend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Tests
+        run: npm test
+      - name: Build
+        run: npm run build
+
+  mobile:
+    name: Mobile
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+
+      # The repo's .npmrc sets legacy-peer-deps: the Expo 57 tree pins
+      # react@19.2.3 while a transitive react-dom asks for ^19.2.8.
+      - run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Tests
+        run: npm test
+
+  site:
+    name: Site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # The marketing site is one static file with no build step, so CI only
+      # checks that it parses and that its structured data stays valid JSON.
+      - name: Validate index.html and structured data
+        run: |
+          python3 - <<'PY'
+          import html.parser, json, re, sys, pathlib
+
+          source = pathlib.Path("site/index.html").read_text(encoding="utf-8")
+
+          class Checker(html.parser.HTMLParser):
+              VOID = {"meta", "link", "br", "img", "input", "hr",
+                      "source", "path", "circle", "rect", "use"}
+
+              def __init__(self):
+                  super().__init__()
+                  self.stack = []
+                  self.problems = []
+
+              def handle_starttag(self, tag, attrs):
+                  if tag not in self.VOID:
+                      self.stack.append(tag)
+
+              def handle_endtag(self, tag):
+                  if tag in self.VOID:
+                      return
+                  if self.stack and self.stack[-1] == tag:
+                      self.stack.pop()
+                  else:
+                      self.problems.append(f"unexpected </{tag}>")
+
+          checker = Checker()
+          checker.feed(source)
+          if checker.stack:
+              checker.problems.append(f"unclosed: {checker.stack}")
+
+          block = re.search(r'<script type="application/ld\+json">(.*?)</script>', source, re.S)
+          if not block:
+              checker.problems.append("structured data block missing")
+          else:
+              try:
+                  json.loads(block.group(1))
+              except json.JSONDecodeError as error:
+                  checker.problems.append(f"structured data is not valid JSON: {error}")
+
+          if checker.problems:
+              print("\n".join(checker.problems))
+              sys.exit(1)
+          print("site/index.html is well formed")
+          PY
+
+      - name: Validate sitemap.xml
+        run: python3 -c "import xml.dom.minidom; xml.dom.minidom.parse('site/sitemap.xml'); print('sitemap.xml is valid')"
