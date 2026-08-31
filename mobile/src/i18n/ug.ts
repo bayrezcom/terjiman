@@ -7,7 +7,7 @@ import type { Translations } from './en';
 const ug: Translations = {
   common: {
     appName: 'تەرجىمان',
-    byBr: 'by BR',
+    company: 'بايرېز',
     tagline: 'ئەقلىي ئىقتىدارلىق تەرجىمان',
     cancel: 'بىكار قىلىش',
     delete: 'ئۆچۈرۈش',

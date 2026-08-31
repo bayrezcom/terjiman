@@ -3,7 +3,7 @@ import type { Translations } from './en';
 const ar: Translations = {
   common: {
     appName: 'ترجمان',
-    byBr: 'by BR',
+    company: 'بايرز',
     tagline: 'مترجم بالذكاء الاصطناعي',
     cancel: 'إلغاء',
     delete: 'حذف',

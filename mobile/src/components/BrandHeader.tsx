@@ -1,5 +1,4 @@
 import { StyleSheet, View } from 'react-native';
-import { APP_NAME_NATIVE } from '../constants/config';
 import { SPACING } from '../constants/theme';
 import { useI18n } from '../hooks/useI18n';
 import { AppText } from './AppText';
@@ -10,9 +9,10 @@ export interface BrandHeaderProps {
 }
 
 /**
- * The wordmark: تەرجىمان set large with a deliberately smaller "by BR", so the
- * brand reads without shouting.
- */
+  * The wordmark: the product name set large with the company name smaller
+  * beside it. Both come from the active locale, so a single line is never half
+  * Latin and half Arabic script.
+  */
 export function BrandHeader({ right }: BrandHeaderProps) {
   const { t, isRtl } = useI18n();
   return (
@@ -20,10 +20,10 @@ export function BrandHeader({ right }: BrandHeaderProps) {
       <View style={styles.titleBlock}>
         <View style={[styles.titleRow, { flexDirection: isRtl ? 'row-reverse' : 'row' }]}>
           <AppText variant="display" weight="bold">
-            {APP_NAME_NATIVE}
+            {t('common.appName')}
           </AppText>
           <AppText variant="label" weight="medium" tone="subtle" style={styles.byLine}>
-            {t('common.byBr')}
+            {t('common.company')}
           </AppText>
         </View>
         <AppText variant="caption" tone="muted" style={styles.tagline}>

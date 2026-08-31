@@ -3,7 +3,7 @@ import type { Translations } from './en';
 const tr: Translations = {
   common: {
     appName: 'Terjiman',
-    byBr: 'by BR',
+    company: 'BAYREZ',
     tagline: 'Yapay Zekâ Çevirmen',
     cancel: 'İptal',
     delete: 'Sil',

@@ -19,8 +19,8 @@
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="icon.png">
 
-<meta property="og:site_name" content="تەرجىمان by BR">
-<meta property="og:title" content="تەرجىمان by BR — ئۇيغۇرچىنى راستىنلا بىلىدىغان تەرجىمان">
+<meta property="og:site_name" content="تەرجىمان">
+<meta property="og:title" content="تەرجىمان — ئۇيغۇرچىنى راستىنلا بىلىدىغان تەرجىمان">
 <meta property="og:description" content="مەنە، ئاھاڭ ۋە گرامماتىكىنى ساقلاپ تەرجىمە قىلىدۇ. iOS ۋە Android ئۈچۈن، ھەقسىز ۋە ھېساباتسىز.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://terjiman.bayrez.com/">
@@ -31,7 +31,7 @@
 <meta property="og:locale:alternate" content="tr_TR">
 <meta property="og:locale:alternate" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<title>تەرجىمان by BR — ئۇيغۇرچە ئەقلىي ئىقتىدارلىق تەرجىمە دېتالى</title>
+<title>تەرجىمان — ئۇيغۇرچە ئەقلىي ئىقتىدارلىق تەرجىمە دېتالى</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap">
@@ -122,6 +122,7 @@
   .mark { width: 30px; height: 30px; flex: none; }
   .wordmark { display: flex; align-items: baseline; gap: 7px; }
   .wordmark b { font-family: var(--arabic); font-size: 1.35rem; font-weight: 600; line-height: 1.5; color: var(--navy); }
+  body:not([data-lang="ug"]) .wordmark b { font-family: var(--display); font-size: 1.25rem; letter-spacing: -0.02em; }
   .wordmark i { font-style: normal; font-family: var(--sans); font-size: 0.66rem; font-weight: 600; letter-spacing: 0.09em; color: var(--navy-faint); }
 
   /* ---- Nav ---- */
@@ -311,9 +312,8 @@
     {
       "@type": "SoftwareApplication",
       "@id": "https://terjiman.bayrez.com/#app",
-      "name": "تەرجىمان by BR",
+      "name": "تەرجىمان",
       "alternateName": [
-        "Terjiman by BR",
         "Terjiman"
       ],
       "description": "ئۇيغۇرچە، تۈركچە، ئىنگلىزچە، ئەرەبچە ۋە خەنزۇچە ئارىسىدا مەنە ۋە ئاھاڭنى ساقلايدىغان ئەقلىي ئىقتىدارلىق تەرجىمە دېتالى.",
@@ -362,7 +362,7 @@
       "@type": "WebSite",
       "@id": "https://terjiman.bayrez.com/#website",
       "url": "https://terjiman.bayrez.com/",
-      "name": "تەرجىمان by BR",
+      "name": "تەرجىمان",
       "inLanguage": "ug",
       "publisher": {
         "@id": "https://terjiman.bayrez.com/#publisher"
@@ -386,7 +386,7 @@
         <rect x="232" y="286" width="160" height="20" rx="10" fill="#FFFFFF"/>
         <rect x="232" y="328" width="100" height="20" rx="10" fill="#FFFFFF"/>
       </svg>
-      <span class="wordmark"><b>تەرجىمان</b><i>by BR</i></span>
+      <span class="wordmark"><b data-i18n="brand.name">تەرجىمان</b><i data-i18n="brand.company">بايرېز</i></span>
     </a>
     <nav class="nav-links" aria-label="Site">
       <a href="#features" data-i18n="nav.features">ئىقتىدارلار</a>
@@ -595,7 +595,7 @@
             <rect x="232" y="286" width="160" height="20" rx="10" fill="#FFFFFF"/>
             <rect x="232" y="328" width="100" height="20" rx="10" fill="#FFFFFF"/>
           </svg>
-          <span class="wordmark"><b>تەرجىمان</b><i>by BR</i></span>
+          <span class="wordmark"><b data-i18n="brand.name">تەرجىمان</b><i data-i18n="brand.company">بايرېز</i></span>
         </div>
         <p style="color: var(--navy-soft); font-size: 0.875rem; max-width: 32ch;" data-i18n="foot.tag">ئۇيغۇرچىنى ئالدىنقى ئورۇنغا قويۇپ ئىشلەنگەن ئەقلىي ئىقتىدارلىق تەرجىمە دېتالى.</p>
       </div>
@@ -696,6 +696,8 @@
   /* ---- Interface language ---------------------------------------------- */
   var STRINGS = {
     tr: {
+      "brand.name": "Terjiman",
+      "brand.company": "BAYREZ",
       "nav.features": "Özellikler",
       "nav.uyghur": "Uygurca",
       "nav.languages": "Diller",
@@ -770,6 +772,8 @@
       "foot.rights": "© 2026 · Dubai · Tüm hakları saklıdır."
     },
     en: {
+      "brand.name": "Terjiman",
+      "brand.company": "BAYREZ",
       "nav.features": "Features",
       "nav.uyghur": "Uyghur",
       "nav.languages": "Languages",

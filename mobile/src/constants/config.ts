@@ -36,5 +36,9 @@ export const MAX_HISTORY_ITEMS = 100;
 
 export const APP_VERSION = Constants.expoConfig?.version ?? '1.0.0';
 
-export const APP_NAME_LATIN = 'Terjiman by BR';
+/**
+ * Shown before the interface language is known — on the splash screen, where
+ * the stores have not hydrated yet. Uyghur is the product's primary identity,
+ * so it stands alone rather than beside a Latin word.
+ */
 export const APP_NAME_NATIVE = 'تەرجىمان';

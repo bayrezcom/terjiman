@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Terjiman by BR",
+    "name": "Terjiman",
     "slug": "terjiman-by-br",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -15,7 +15,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.bayrez.terjiman",
       "infoPlist": {
-        "CFBundleDisplayName": "تەرجىمان by BR",
+        "CFBundleDisplayName": "Terjiman",
         "NSMicrophoneUsageDescription": "Terjiman uses the microphone only while you are recording speech to translate. Recordings are sent for transcription and are not stored.",
         "ITSAppUsesNonExemptEncryption": false
       }

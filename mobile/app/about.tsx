@@ -2,7 +2,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { AppText } from '../src/components/AppText';
 import { Card } from '../src/components/Card';
 import { Screen } from '../src/components/Screen';
-import { APP_NAME_LATIN, APP_NAME_NATIVE, APP_VERSION } from '../src/constants/config';
+import { APP_VERSION } from '../src/constants/config';
 import { SPACING } from '../src/constants/theme';
 import { useI18n } from '../src/hooks/useI18n';
 
@@ -15,10 +15,10 @@ export default function AboutScreen() {
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.brand}>
           <AppText variant="display" weight="bold">
-            {APP_NAME_NATIVE}
+            {t('common.appName')}
           </AppText>
           <AppText variant="label" tone="muted">
-            {APP_NAME_LATIN}
+            {t('common.company')}
           </AppText>
         </View>
 
