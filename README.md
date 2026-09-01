@@ -169,7 +169,22 @@ port 3000, so a physical device can reach a backend on your machine.
 
 ## Running locally
 
-**Backend**
+**Both at once**
+
+```bash
+./scripts/dev.sh
+```
+
+Installs what is missing, starts the backend, waits for it to answer, then
+opens the app in your browser at http://localhost:8081. Ctrl+C stops both.
+Without an API key it runs the mock provider, so every screen and state can be
+exercised offline — translations come back as `[mock] …`. With a key:
+
+```bash
+AI_API_KEY=sk-... ./scripts/dev.sh
+```
+
+**Backend on its own**
 
 ```bash
 cd backend
